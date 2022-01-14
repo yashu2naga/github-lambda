@@ -1,7 +1,8 @@
 import boto3
+import pandas as pd
 # import module
 from tabulate import tabulate
-ses_client = boto3.client('ses',region_name='us-west-2')
+ses_client = boto3.client('ses',region_name='ap-south-1')
 
 # if __name__ == '__main__':
 def lambda_handler(event, context):
@@ -30,7 +31,7 @@ def lambda_handler(event, context):
         Destination={
            
             "ToAddresses": [
-                "abyaya.hotta@wisseninfotech.com",
+                "yasaswini.kalamkuntla@wisseninfotech.com",
             ],
         },
         Message={
@@ -45,7 +46,7 @@ def lambda_handler(event, context):
                 "Data": "Amazing Email Tutorial",
             },
         },
-        Source="abyaya.hotta@wisseninfotech.com",
+        Source="yasaswini.kalamkuntla@wisseninfotech.com",
         
     )
     
