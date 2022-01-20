@@ -82,18 +82,18 @@
                             "Effect": "Allow",
                             "Action": [
                                 "sqs:*",
-								"ec2:DescribeInstances",
-								"s3:*",
-								"redshift-data:*",
-								"redshift:*",
-								"logs:*",
-								"ec2:DeleteNetworkInterface",
-								"dynamodb:*",
-								"ec2:CreateNetworkInterface",
-								"ec2:DescribeNetworkInterfaces",
-								"cloudwatch:*",
-								"ses:*",
-								"ec2:AttachNetworkInterface"
+				"ec2:DescribeInstances",
+				"s3:*",
+				"redshift-data:*",
+				"redshift:*",
+				"logs:*",
+				"ec2:DeleteNetworkInterface",
+				"dynamodb:*",
+				"ec2:CreateNetworkInterface",
+				"ec2:DescribeNetworkInterfaces",
+				"cloudwatch:*",
+				"ses:*",
+				"ec2:AttachNetworkInterface"
                             ],
                             "Resource": "*"
                         }
