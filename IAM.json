@@ -69,6 +69,25 @@
                 ]
             }
         },
+	    "AmazonSESMangedPolicy": {
+            "Type": "AWS::IAM::ManagedPolicy",
+            "Properties": {
+                "Description": "Managed Policy to attach to MyTestRole Role",
+                "ManagedPolicyName": "AmazonSESFullAccessForLambda",
+                "Path": "/",
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "ses:*"
+                            
+                            ],
+                            "Resource": "*"
+                        }
+                    ]
+                },
 		"redshiftdynamos3fullacces": {
             "Type": "AWS::IAM::ManagedPolicy",
             "Properties": {
