@@ -1,0 +1,150 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Template to Create an IAM Role",
+    "Resources": {
+        "MyTestRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "lambda.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Description": "Role to provide access to S3",
+                "Policies": [
+                    {
+                        "PolicyName": "EmbeddedInlinePolicy",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": "cloudformation:*",
+                                    "Resource": "*"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+                ],
+                "RoleName": "LambdaS3Access"
+            }
+        },
+        "DynamoDBMangedPolicy": {
+            "Type": "AWS::IAM::ManagedPolicy",
+            "Properties": {
+                "Description": "Managed Policy to attach to MyTestRole Role",
+                "ManagedPolicyName": "DynamoDBAccessPolicyForLambda",
+                "Path": "/",
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "dynamodb:Query",
+                                "dynamodb:Scan"
+                            ],
+                            "Resource": "*"
+                        }
+                    ]
+                },
+                "Roles": [
+                    {
+                        "Ref": "MyTestRole"
+                    }
+                ]
+            }
+        },
+		"redshiftdynamos3fullacces": {
+            "Type": "AWS::IAM::ManagedPolicy",
+            "Properties": {
+				"Description": "Managed Policy to attach to MyTestRole Role",
+                "ManagedPolicyName": "redshift-dynamo-s3-fullacces",
+                "Path": "/",
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "sqs:*",
+								"ec2:DescribeInstances",
+								"s3:*",
+								"redshift-data:*",
+								"redshift:*",
+								"logs:*",
+								"ec2:DeleteNetworkInterface",
+								"dynamodb:*",
+								"ec2:CreateNetworkInterface",
+								"ec2:DescribeNetworkInterfaces",
+								"cloudwatch:*",
+								"ses:*",
+								"ec2:AttachNetworkInterface"
+                            ],
+                            "Resource": "*"
+                        }
+                    ]
+                },
+                "Roles": [
+                    {
+                        "Ref": "MyTestRole"
+                    }
+                ]
+            }
+        },
+        "ExternalInlinePolicy": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "sqs:*"
+                            ],
+                            "Resource": "*"
+                        }
+                    ]
+                },
+                "PolicyName": "InlinePolicy",
+                "Roles": [
+                    {
+                        "Ref": "MyTestRole"
+                    }
+                ]
+            }
+        }
+    },
+    "Outputs": {
+        "RoleName": {
+            "Description": "Name of Created IAM Role",
+            "Value": {
+                "Ref": "MyTestRole"
+            }
+        },
+        "RoleArn": {
+            "Description": "Arn of Created Role",
+            "Value": {
+                "Fn::GetAtt": [
+                    "MyTestRole",
+                    "Arn"
+                ]
+            }
+        }
+    }
+}
