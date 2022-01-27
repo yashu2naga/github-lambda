@@ -1,5 +1,5 @@
-import boto3
-import pandas as pd
+#import boto3
+#import pandas as pd
 # import module
 from tabulate import tabulate
 ses_client = boto3.client('ses',region_name='us-west-2')
