@@ -16,7 +16,7 @@ def lambda_handler(event, context):
   
     # display table
     print(tabulate(my_list, headers=head, tablefmt="grid"))
-    # table = [['one','two','three'],['four','five','six'],['seven','eight','nine']]
+    # table = [['one','two','three'],['four','five','six'],['seven','eight','ten']]
     second_list=tabulate(my_list,headers=head, tablefmt='html')
     print((second_list))
     
