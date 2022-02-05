@@ -14,3 +14,9 @@ phases:
       - cd ..
       - zip -g deployment_package.zip lambda_function.py
 
+  artifacts:
+    files:
+      - '**/*'
+    base-directory: base_dir
+    name: build-artifact-name
+    discard-paths: no
