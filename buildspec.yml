@@ -14,9 +14,8 @@ phases:
       - cd ..
       - zip -g deployment_package.zip lambda_function.py
 
-  artifacts:
-    files:
-      - '**/*'
-    base-directory: base_dir
-    name: build-artifact-name
-    discard-paths: no
+  post_build:
+    commands:
+      - echo "Updating lambda Function..."
+      - aws lambda update-function-code --function-name github-lambda --zip-file fileb://deployment_package.zip
+      - echo "DONE!!"
