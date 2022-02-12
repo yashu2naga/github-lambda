@@ -1,4 +1,4 @@
-#import boto3
+import boto3
 #import pandas as pd
 # import module
 from tabulate import tabulate
