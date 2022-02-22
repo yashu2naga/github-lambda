@@ -1,13 +1,12 @@
 import boto3
-#import pandas as pd
 # import module
 from tabulate import tabulate
 ses_client = boto3.client('ses',region_name='us-west-2')
 
 # if __name__ == '__main__':
 def lambda_handler(event, context):
-    my_list=[('Abyaya', 'Hotta', 123), ('yasaswini', 'Kompala',333 ),
-             ('Sathyanarayana', 'Dathrika', 567), ('Praveen', 'Maroju', 222),
+    my_list=[('Abyaya', 'Hotta', 123), ('Balakrishna', 'Kompala', 345),
+             ('Sathyanarayana', 'Dathrika', 567), ('Praveen', 'Maroju', 631),
              ('Giridhar', 'Pochareddy', 151)]
     
     print(my_list)
@@ -16,7 +15,7 @@ def lambda_handler(event, context):
   
     # display table
     print(tabulate(my_list, headers=head, tablefmt="grid"))
-    # table = [['one','two','three'],['four','five','six'],['seven','eight','ten']]
+    # table = [['one','two','three'],['four','five','six'],['seven','eight','nine']]
     second_list=tabulate(my_list,headers=head, tablefmt='html')
     print((second_list))
     
@@ -31,7 +30,7 @@ def lambda_handler(event, context):
         Destination={
            
             "ToAddresses": [
-                "yasaswini.kalamkuntla@wisseninfotech.com",
+                "abyaya.hotta@wisseninfotech.com",
             ],
         },
         Message={
@@ -43,10 +42,11 @@ def lambda_handler(event, context):
             },
             "Subject": {
                 "Charset": CHARSET,
-                "Data": "Amazing Email Tutorial",
+                "Data": "Redshift Lambda for LongRunning",
             },
         },
-        Source="yasaswini.kalamkuntla@wisseninfotech.com",
+        Source="abyaya.hotta@wisseninfotech.com",
         
     )
+
     
